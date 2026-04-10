@@ -99,3 +99,24 @@ def unitree_g1_flat_tracking_env_cfg(
     motion_cmd.sampling_mode = "start"
 
   return cfg
+
+
+##################################################################
+# CUSTOM W/ PELVIS & NO STATE ESTIMATION
+##################################################################
+
+def unitree_g1_pelvis_tracking_env_cfg(
+  play: bool = False,
+) -> ManagerBasedRlEnvCfg:
+
+  cfg = unitree_g1_flat_tracking_env_cfg(
+    has_state_estimation=False,
+    play=play,
+  )
+
+  # Use pelvis as the anchor instead of torso.
+  motion_cmd = cfg.commands["motion"]
+  assert isinstance(motion_cmd, MotionCommandCfg)
+  motion_cmd.anchor_body_name = "pelvis"
+
+  return cfg
