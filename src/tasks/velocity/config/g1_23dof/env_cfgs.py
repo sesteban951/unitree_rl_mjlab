@@ -193,3 +193,17 @@ def unitree_g1_23dof_flat_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
     twist_cmd.ranges.ang_vel_z = (-0.5, 0.5)
 
   return cfg
+
+
+##################################################################
+# CUSTOM W/ SLOWER GAIT PERIOD
+##################################################################
+
+def unitree_g1_23dof_flat_custom_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
+  """Create Unitree G1-23DOF flat terrain velocity configuration with slower gait period."""
+  cfg = unitree_g1_23dof_flat_env_cfg(play=play)
+
+  # Slow down the gait period to encourage more natural walking.
+  cfg.rewards["foot_gait"].params["period"] = 0.9
+  
+  return cfg
