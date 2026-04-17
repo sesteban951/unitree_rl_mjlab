@@ -23,6 +23,8 @@ from mjlab.viewer import NativeMujocoViewer, ViserPlayViewer
 class PlayConfig:
   agent: Literal["zero", "random", "trained"] = "trained"
   checkpoint_file: str | None = None
+  wandb_run_path: str | None = None   # WandB run path (entity/project/run_id) to download checkpoint from.
+  registry_name: str | None = None    # WandB registry name to download motion files from.
   motion_file: str | None = None
   num_envs: int | None = None
   device: str | None = None
